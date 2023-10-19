@@ -1,7 +1,9 @@
-const StartButton = () => (
-    <div>
+import { StyledStartButton } from "./styles/StyledStartButton";
+
+const StartButton = ({ callback }) => (
+    <StyledStartButton onClick={callback}>
         Start Game
-    </div>
+    </StyledStartButton>
 );
 
 export default StartButton;
