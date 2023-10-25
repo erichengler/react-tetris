@@ -10,6 +10,8 @@ export const usePlayer = () => {
         collided: false,
     });
 
+    console.log(player);
+
     const updatePlayerPos = ({ x, y, collided }) => {
         setPlayer(prev => ({
             ...prev,

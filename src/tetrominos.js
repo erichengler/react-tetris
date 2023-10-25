@@ -77,5 +77,5 @@ export const randomTetromino = () => {
     // Get random tetromino
     const randTetromino = 
         tetrominos[Math.floor(Math.random() * tetrominos.length)];
-    return randTetromino;
+    return TETROMINOS[randTetromino];
 }
