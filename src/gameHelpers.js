@@ -21,7 +21,6 @@ export const checkCollision = (player, stage, { x: moveX, y: moveY }) => {
                 // 4. Check that the cell we're moving to isn't set to clear
                 stage[y + player.pos.y + moveY][x + player.pos.x + moveX][1] !== 'clear'
                 ) {
-                    console.log('collided');
                     return true;
                 }
             }
