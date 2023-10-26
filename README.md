@@ -2,7 +2,12 @@
 
 A simple tetris game using React!
 
+## Preview
+
 ![preview](./public/preview.png)
+<br /><br />
+
+## What I Learned
 
 I realize react probably isn't the best way to make games (even simple games like tetris) but I have a crazy passion for video games and wanted to mix this passion with my knowledge of React and Javascript that I learned from my time at Prime Digital Academy earlier this year.
 
