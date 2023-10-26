@@ -1,34 +1,39 @@
 import { useState, useEffect } from "react";
 import { createStage } from "../gameHelpers";
 
-export const useStage = (player, resetPlayer) => {
-    const [stage, setStage] = useState(createStage());
+export const useStage = (player, setPlayer, resetPlayer) => {
+  const [stage, setStage] = useState(createStage());
 
-    useEffect(() => {
-        const updateStage = prevStage => {
-            // First flush the stage
-            const newStage = prevStage.map(row => 
-                row.map(cell => (cell[1] === 'clear' ? [0, 'clear'] : cell)),
-            );
+  useEffect(() => {
+    const updateStage = (prevStage) => {
+      // First flush the stage
+      const newStage = prevStage.map((row) =>
+        row.map((cell) => (cell[1] === "clear" ? [0, "clear"] : cell))
+      );
 
-            // Then draw the tetromino
-            player.tetromino.forEach((row, y) => {
-                row.forEach((value, x) => {
-                    if (value !== 0) {
-                        newStage[y + player.pos.y][x + player.pos.x] = [
-                            value,
-                            `${player.collided ? 'merged' : 'clear'}`,
-                        ]
-                    }
-                });
-            });
+      // Then draw the tetromino
+      player.tetromino.forEach((row, y) => {
+        row.forEach((value, x) => {
+          if (value !== 0) {
+            newStage[y + player.pos.y][x + player.pos.x] = [
+              value,
+              `${player.collided ? "merged" : "clear"}`,
+            ];
+          }
+        });
+      });
 
-            return newStage;
-        };
+      // Then check if we collided with anything
+      if (player.collided) {
+        // ! Not recognized as a function for some reason
+        resetPlayer();
+      }
 
-        setStage(prev => updateStage(prev));
+      return newStage;
+    };
 
-    }, [player]);
+    setStage((prev) => updateStage(prev));
+  }, [player, resetPlayer]);
 
-    return [stage, setStage];
-}
+  return [stage, setStage];
+};
