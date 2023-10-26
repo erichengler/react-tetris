@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { createStage } from "../gameHelpers";
 
-export const useStage = (player, setPlayer, resetPlayer) => {
+export const useStage = (player, resetPlayer) => {
   const [stage, setStage] = useState(createStage());
 
   useEffect(() => {
@@ -25,7 +25,6 @@ export const useStage = (player, setPlayer, resetPlayer) => {
 
       // Then check if we collided with anything
       if (player.collided) {
-        // ! Not recognized as a function for some reason
         resetPlayer();
       }
 

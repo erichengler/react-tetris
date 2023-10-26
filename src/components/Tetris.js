@@ -15,7 +15,7 @@ const Tetris = () => {
   const [gameOver, setGameOver] = useState(false);
 
   const [player, updatePlayerPos, resetPlayer] = usePlayer();
-  const [stage, setStage] = useStage(player);
+  const [stage, setStage] = useStage(player, resetPlayer);
 
   const movePlayer = direction => {
     if (!checkCollision(player, stage, { x: direction, y: 0 })) {
