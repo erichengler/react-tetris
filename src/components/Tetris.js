@@ -9,6 +9,7 @@ import { StyledTetris, StyledTetrisWrapper } from "./styles/StyledTetris";
 // Custom hooks
 import { usePlayer } from "../hooks/usePlayer";
 import { useStage } from "../hooks/useStage";
+import { useInterval } from "../hooks/useInterval";
 
 const Tetris = () => {
   const [dropTime, setDropTime] = useState(null);
@@ -26,6 +27,7 @@ const Tetris = () => {
   const startGame = () => {
     // Reset everything
     setStage(createStage());
+    setDropTime(1000);
     resetPlayer();
     setGameOver(false);
   }
@@ -46,7 +48,20 @@ const Tetris = () => {
 
   }
 
+  // Turn interval back on when player releases down key
+  const keyUp = ({ keyCode }) => {
+    if (!gameOver) {
+      if (keyCode === 40) {
+        console.log("interval on");
+        setDropTime(1000);
+      }
+    }
+  }
+
+  // Turn interval off and drop tetromino when player presses down key
   const dropPlayer = () => {
+    console.log("interval off");
+    setDropTime(null);
     drop();
   }
 
@@ -64,18 +79,25 @@ const Tetris = () => {
     }
   }
 
+  useInterval(() => {
+    drop();
+  }, dropTime)
+
   return (
     <StyledTetrisWrapper 
       role="button" 
       tabIndex="0" 
       onKeyDown={ e => move(e) }
+      onKeyUp={ keyUp }
     >
       <StyledTetris>
         <Stage stage={stage} />
         <aside>
           {/* if game is over, display game over */}
           {gameOver ? (
-            <Display gameOver={gameOver} text="Game Over" />
+            // ! Remove the $ to make Game Over text red 
+            // ! This will cause error though - Figure this out!
+            <Display $gameOver={gameOver} text="Game Over" />
           ) : (
           // if game is not over, display the score, rows and level
             <div>
