@@ -6,4 +6,6 @@ const Cell = ({ type }) => (
     <StyledCell type={type} color={TETROMINOS[type].color} />
 )
 
+// Only re-renders cells that actually change
+// Reduces re-renders by A LOT!
 export default React.memo(Cell);
